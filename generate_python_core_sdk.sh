@@ -7,7 +7,7 @@ xecho() {
 [[ -z "${COSMOS_SDK}" ]] && xecho "Pease clone the official cosmos-sdk repository (https://github.com/cosmos/cosmos-sdk) and set the location to the COSMOS_SDK env variable."
 
 if ! command -v protoc &> /dev/null
-then xecho "Please install protoc, the protobuf compiler, to generate the python client"
+then xecho "To generate the python client, please install protoc, the protobuf compiler!"
 fi
 
 for src in $(find "${COSMOS_SDK}"/proto -iname "*.proto")
