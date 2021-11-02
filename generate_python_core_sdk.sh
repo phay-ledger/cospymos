@@ -1,3 +1,15 @@
-for src in $(find /Users/phay/Crypto/cosmos/cosmos-sdk/proto -iname "*.proto")
-do protoc --python_out=/Users/phay/Crypto/cosmos/cospymos/proto-generated --proto_path=/Users/phay/Crypto/cosmos/cosmos-sdk/third_party/proto/ --proto_path=/Users/phay/Crypto/cosmos/cosmos-sdk/proto $src
+xecho() {
+    echo $1
+    exit 1
+}
+
+
+[[ -z "${COSMOS_SDK}" ]] && xecho "Pease clone the official cosmos-sdk repository (https://github.com/cosmos/cosmos-sdk) and set the location to the COSMOS_SDK env variable."
+
+if ! command -v protoc &> /dev/null
+then xecho "Please install protoc, the protobuf compiler, to generate the python client"
+fi
+
+for src in $(find "${COSMOS_SDK}"/proto -iname "*.proto")
+do protoc --python_out=./proto-generated --proto_path="${COSMOS_SDK}"/third_party/proto/ --proto_path="${COSMOS_SDK}"/proto $src
 done
